@@ -3,18 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Title (display)
-title: Japan CSS Support Example Blog
+title: OKT TEST Blog
 # Sub Title (display)
-subtitle: Japan CSS Support Example Blog
+subtitle: OKT TEST Blog
 # Description
-description: Japan CSS Support Example Blog
+description: OKT TEST Blog
 
 # Keywords
 keywords:
   - Information
   - Example
 
-author: CSS Japan
+author: OKT
 
 # Tag (hexo helper)
 root_tag_generator:
@@ -24,9 +24,9 @@ root_tag_generator:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://cssjpn.github.io/blog/
+url: https://yukiokt-lab.github.io/blog/
 github:
-  url: https://github.com/cssjpn/blog-example/
+  url: https://github.com/yukiokt-lab/blog/
   posts_dir: articles
   default_branch: main
 
@@ -41,7 +41,7 @@ skip_render:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:cssjpn/blog-example.git
+  repo: git@github.com:yukiokt-lab/blog.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }} [skip ci]"
 
