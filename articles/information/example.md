@@ -1,6 +1,6 @@
 ---
-title: サンプル記事 - タイトル
-date: 2021-01-01 12:00:00
+title: 私、バリキャリOLのたかと。
+date: 2023-01-01 12:00:00
 tags:
   - Information
   - Example
@@ -11,7 +11,7 @@ disableDisclaimer: false
 
 <!-- more -->
 
-記事本文
+未来について今日は語ろうとおもうわ。
 
 <!-- 文字修飾 -->
 
