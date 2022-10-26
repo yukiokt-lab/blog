@@ -1,6 +1,6 @@
 ---
 title: SQL Server DB に対する Azure Backupを、Proxy Serverをバイパスして PE 経由でバックアップする場合の設定
-date: 2022-10-25 12:00:00
+date: 2022-10-27 12:00:00
 tags:
   - Azure SQL バックアップ
   - how to
@@ -54,7 +54,7 @@ Poxyを経由させてSQL Server DB に対する Azure Backupを行いたい場�
 
 管理者特権のプロンプトから ダウンロードしたファイルを解凍したフォルダに移動し 、次のコマンドを実行して Internet Explorer を開きます。​
 （実行コマンド）
-        psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe"​
+  >psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe"​
 
 Internet Explorer で、[ツール] > [インターネット オプション] > [接続] > [LAN の設定] の順に移動します。​
 システム アカウントの Proxy 設定を確認します。 
@@ -70,7 +70,7 @@ Proxy の IP アドレスとポートを設定します。​
 　ここに、以下を記入することで、SQL Server DB に対する Azure Backup 実行時はプロキシをバイパスさせることができます。
 　LocalHost 、Wire Server （168.63.129.16）、169.254.169.254、上記ドキュメント記載のAzure Backup、Azure Storage、AAD
 （実際の入力値）
-        ​localhost;168.63.129.16;169.254.169.254;*.backup.windowsazure.com;*.queue.core.windows.net;*.blob.core.windows.net;*.blob.storage.azure.net;*.msftidentity.com;*.msidentity.com;account.activedirectory.windowsazure.com;accounts.accesscontrol.windows.net;adminwebservice.microsoftonline.com;api.passwordreset.microsoftonline.com;autologon.microsoftazuread-sso.com;becws.microsoftonline.com;clientconfig.microsoftonline-p.net;companymanager.microsoftonline.com;device.login.microsoftonline.com;graph.microsoft.com;graph.windows.net;login.microsoft.com;login.microsoftonline.com;login.microsoftonline-p.com;login.windows.net;logincert.microsoftonline.com;loginex.microsoftonline.com;login-us.microsoftonline.com;nexus.microsoftonline-p.com;passwordreset.microsoftonline.com;provisioningapi.microsoftonline.com;20.190.128.*;40.126.*;*.hip.live.com;*.microsoftonline.com;*.microsoftonline-p.com;*.msauth.net;*.msauthimages.net;*.msecnd.net;*.msftauth.net;*.msftauthimages.net;*.phonefactor.net;enterpriseregistration.windows.net;management.azure.com;policykeyservice.dc.ad.msft.net
+  >​localhost;168.63.129.16;169.254.169.254;*.backup.windowsazure.com;*.queue.core.windows.net;*.blob.core.windows.net;*.blob.storage.azure.net;*.msftidentity.com;*.msidentity.com;account.activedirectory.windowsazure.com;accounts.accesscontrol.windows.net;adminwebservice.microsoftonline.com;api.passwordreset.microsoftonline.com;autologon.microsoftazuread-sso.com;becws.microsoftonline.com;clientconfig.microsoftonline-p.net;companymanager.microsoftonline.com;device.login.microsoftonline.com;graph.microsoft.com;graph.windows.net;login.microsoft.com;login.microsoftonline.com;login.microsoftonline-p.com;login.windows.net;logincert.microsoftonline.com;loginex.microsoftonline.com;login-us.microsoftonline.com;nexus.microsoftonline-p.com;passwordreset.microsoftonline.com;provisioningapi.microsoftonline.com;20.190.128.*;40.126.*;*.hip.live.com;*.microsoftonline.com;*.microsoftonline-p.com;*.msauth.net;*.msauthimages.net;*.msecnd.net;*.msftauth.net;*.msftauthimages.net;*.phonefactor.net;enterpriseregistration.windows.net;management.azure.com;policykeyservice.dc.ad.msft.net
 
 ![](https://user-images.githubusercontent.com/96324317/197693453-7e4e98b9-a52b-4965-bd0a-f5751bfd4c90.png)
 	
@@ -115,7 +115,7 @@ Azure ポータル画面上から、対象の SQL Server DB に対して「デ�
 　ここに、以下を記入することで、SQL Server DB に対する Azure Backup 実行時はプロキシをバイパスさせることができます。
 　LocalHost 、Wire Server （168.63.129.16）、169.254.169.254、上記ドキュメント記載のAzure Backup、Azure Storage、AAD
 （実際の入力値）
-        ​localhost;168.63.129.16;169.254.169.254;*.backup.windowsazure.com;*.queue.core.windows.net;*.blob.core.windows.net;*.blob.storage.azure.net;*.msftidentity.com;*.msidentity.com;account.activedirectory.windowsazure.com;accounts.accesscontrol.windows.net;adminwebservice.microsoftonline.com;api.passwordreset.microsoftonline.com;autologon.microsoftazuread-sso.com;becws.microsoftonline.com;clientconfig.microsoftonline-p.net;companymanager.microsoftonline.com;device.login.microsoftonline.com;graph.microsoft.com;graph.windows.net;login.microsoft.com;login.microsoftonline.com;login.microsoftonline-p.com;login.windows.net;logincert.microsoftonline.com;loginex.microsoftonline.com;login-us.microsoftonline.com;nexus.microsoftonline-p.com;passwordreset.microsoftonline.com;provisioningapi.microsoftonline.com;20.190.128.*;40.126.*;*.hip.live.com;*.microsoftonline.com;*.microsoftonline-p.com;*.msauth.net;*.msauthimages.net;*.msecnd.net;*.msftauth.net;*.msftauthimages.net;*.phonefactor.net;enterpriseregistration.windows.net;management.azure.com;policykeyservice.dc.ad.msft.net
+  >​localhost;168.63.129.16;169.254.169.254;*.backup.windowsazure.com;*.queue.core.windows.net;*.blob.core.windows.net;*.blob.storage.azure.net;*.msftidentity.com;*.msidentity.com;account.activedirectory.windowsazure.com;accounts.accesscontrol.windows.net;adminwebservice.microsoftonline.com;api.passwordreset.microsoftonline.com;autologon.microsoftazuread-sso.com;becws.microsoftonline.com;clientconfig.microsoftonline-p.net;companymanager.microsoftonline.com;device.login.microsoftonline.com;graph.microsoft.com;graph.windows.net;login.microsoft.com;login.microsoftonline.com;login.microsoftonline-p.com;login.windows.net;logincert.microsoftonline.com;loginex.microsoftonline.com;login-us.microsoftonline.com;nexus.microsoftonline-p.com;passwordreset.microsoftonline.com;provisioningapi.microsoftonline.com;20.190.128.*;40.126.*;*.hip.live.com;*.microsoftonline.com;*.microsoftonline-p.com;*.msauth.net;*.msauthimages.net;*.msecnd.net;*.msftauth.net;*.msftauthimages.net;*.phonefactor.net;enterpriseregistration.windows.net;management.azure.com;policykeyservice.dc.ad.msft.net
 
 ![](https://user-images.githubusercontent.com/96324317/197693971-4fcf367e-2685-4284-b0f4-4e8c0c457e38.png)
 
@@ -123,13 +123,13 @@ Azure ポータル画面上から、対象の SQL Server DB に対して「デ�
 下記コマンドを実行することで、カレントユーザーに対して行った設定が、「NT Service\AzureWLBackupPluginSvc」アカウントへ引き継がれます。
 
 （実行コマンド）
-        $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
-        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
-        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name SavedLegacySettings -Value $obj.SavedLegacySettings
-        $obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings"  
-        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
-        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
-        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyOverride -Value $obj.ProxyOverride
+  >$obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections"
+  >Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name DefaultConnectionSettings -Value $obj.DefaultConnectionSettings
+  >Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections" -Name SavedLegacySettings -Value $obj.SavedLegacySettings
+  >$obj = Get-ItemProperty -Path Registry::"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings"  
+  >Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
+  >Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
+  >Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-80-1631947889-4033244730-3205203906-53534054-4184208151\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyOverride -Value $obj.ProxyOverride
 
 ![](https://user-images.githubusercontent.com/96324317/197694217-0ac20679-c842-419b-a6f4-a68bf609eccb.png)
 
