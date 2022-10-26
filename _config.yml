@@ -3,55 +3,30 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Title (display)
-title: Japan CSS ABRS  Support Blog !!
+title: OKT TEST Blog
 # Sub Title (display)
-subtitle: Azure Backup , Azure Site Recovery , Azure Migrate に関するサポート情報を発信します。
+subtitle: OKT TEST Blog
 # Description
-description: Japan CSS ABRS  Support Blog !!
+description: OKT TEST Blog
 
 # Keywords
 keywords:
-  - Azure Backup 
-  - Azure VM Backup
-  - Azure VM バックアップ
-  - Azure SQL バックアップ
-  - Azure SAP HANA バックアップ
-  - Azure Files Backup
-  - Azure Files バックアップ
-  - Azure Site Recovery 
-  - Azure Migrate
-  - DPM
-  - MABS
-  - SCOM
-  - SCEM
-  - System Center
-  - Microsoft
-  - Microsoft 公式情報
-  - Recovery Services vaults
-  
+  - Information
+  - Example
 
-author: Japan CSS ABRS & SCEM Support Team
+author: OKT
 
 # Tag (hexo helper)
 root_tag_generator:
   root_tag_names:
     - Information
-    - Azure Backup
-    - Azure VM Backup
-    - Azure Files Backup
-    - System Center
-    - Recovery Services vaults
-    - Azure Site Recovery
-    - Azure Migrate
-    - MARS Backup 
-    - DPM / MABS 
   sub_tag_limit: 20
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://jpabrs-scem.github.io/blog/
+url: https://yukiokt-lab.github.io/blog/
 github:
-  url: https://jpabrs-scem.github.io/blog/
+  url: https://github.com/yukiokt-lab/blog/
   posts_dir: articles
   default_branch: main
 
@@ -66,7 +41,7 @@ skip_render:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:jpabrs-scem/blog.git
+  repo: git@github.com:yukiokt-lab/blog.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }} [skip ci]"
 
