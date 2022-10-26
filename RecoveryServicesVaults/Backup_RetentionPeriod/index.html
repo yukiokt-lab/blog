@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Backup の 保持期間について | Japan CSS ABRS  Support Blog !!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは。Azure Backup サポートです。今回は、よくお問い合わせをうける「保持期限」について、取りまとめてお伝えします。公開ドキュメント上では、下記のように「最大保有期間：バックアップ頻度次第」と記載が書かれており、実際に「毎日」「毎週」のバックアップを構成した場合の最大保有期間は、ポリシー作成画面で確認するのみとなっております。 ・保有の制限https:&#x2F;&#x2F;docs.micro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Backup の 保持期間について">
+<meta property="og:url" content="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/Backup_RetentionPeriod/index.html">
+<meta property="og:site_name" content="Japan CSS ABRS  Support Blog !!">
+<meta property="og:description" content="皆様こんにちは。Azure Backup サポートです。今回は、よくお問い合わせをうける「保持期限」について、取りまとめてお伝えします。公開ドキュメント上では、下記のように「最大保有期間：バックアップ頻度次第」と記載が書かれており、実際に「毎日」「毎週」のバックアップを構成した場合の最大保有期間は、ポリシー作成画面で確認するのみとなっております。 ・保有の制限https:&#x2F;&#x2F;docs.micro">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2022-10-25T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-26T04:52:08.547Z">
+<meta property="article:author" content="Japan CSS ABRS &amp; SCEM Support Team">
+<meta property="article:tag" content="Recovery Services vaults">
+<meta property="article:tag" content="how to">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan CSS ABRS  Support Blog !!" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpabrs-scem.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan CSS ABRS  Support Blog !!</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">Azure Backup , Azure Site Recovery , Azure Migrate に関するサポート情報を発信します。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-RecoveryServicesVaults/Backup_RetentionPeriod" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Backup の 保持期間について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-10-25T03:00:00.000Z" itemprop="datePublished">2022-10-25</time>
+</a>
+        
+        
+        <a href="https://jpabrs-scem.github.io/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+15194503-f198-56b3-83a3-05bc766d03c5%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Backup+%E3%81%AE+%E4%BF%9D%E6%8C%81%E6%9C%9F%E9%96%93%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpabrs-scem.github.io%2Fblog%2FRecoveryServicesVaults%2FBackup_RetentionPeriod%2F%29%0A*+Content+Source%3A+%5Barticles%2FRecoveryServicesVaults%2FBackup_RetentionPeriod.md%5D%28https%3A%2F%2Fjpabrs-scem.github.io%2Fblog%2Fblob%2Fmain%2Farticles%2FRecoveryServicesVaults%2FBackup_RetentionPeriod.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/Backup_RetentionPeriod/" data-id="cl9p5tvlm00010mpo1vfrg8y2" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<p>皆様こんにちは。Azure Backup サポートです。<br>今回は、よくお問い合わせをうける「保持期限」について、取りまとめてお伝えします。<br>公開ドキュメント上では、下記のように「最大保有期間：バックアップ頻度次第」と記載が書かれており、実際に「毎日」「毎週」のバックアップを構成した場合の最大保有期間は、ポリシー作成画面で確認するのみとなっております。</p>
+<p>・保有の制限<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/backup/backup-support-matrix#retention-limits">https://docs.microsoft.com/ja-jp/azure/backup/backup-support-matrix#retention-limits</a></p>
+<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png">https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png</a></p>
+<p>（図例：Azure VM Backup の場合）<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png">https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png</a></p>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><hr>
+<p><a href="#1">1. Azure VM Backup の場合</a><br><a href="#2">2. Azure ファイル共有に対する Azure Backup の場合</a><br><a href="#3">3. SQL Server DB に対する Azure Backup の場合</a><br><a href="#4">4. SAP HANA DB に対する Azure Backup の場合</a><br><a href="#5">5. Microsoft Azure Recovery Services (MARS) の場合</a></p>
+<hr>
+<h2 id="1-Azure-VM-Backup-の場合"><a href="#1-Azure-VM-Backup-の場合" class="headerlink" title=" 1. Azure VM Backup の場合"></a><a id="1"></a> 1. Azure VM Backup の場合</h2><table>
+<thead>
+<tr>
+<th>Azure VM に対するバックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>インスタント回復スナップショットの保有期間</td>
+<td>1 日</td>
+<td>ポリシーのサブタイプ：Standard の場合： 5<br>ポリシーのサブタイプ：Enhanced の場合： 30 日</td>
+</tr>
+<tr>
+<td>毎日</td>
+<td>7 日</td>
+<td>9999 日</td>
+</tr>
+<tr>
+<td>毎週</td>
+<td>1 週</td>
+<td>5163 週</td>
+</tr>
+<tr>
+<td>毎月</td>
+<td>1 ヶ月</td>
+<td>1188 ヶ月</td>
+</tr>
+<tr>
+<td>毎年</td>
+<td>1 年</td>
+<td>99 年</td>
+</tr>
+</tbody></table>
+<p>（補足）オンデマンド バックアップの場合、最大 99 年まで保持期間を指定可能です。<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png">https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png</a></p>
+<h2 id="2-Azure-ファイル共有に対する-Azure-Backup-の場合"><a href="#2-Azure-ファイル共有に対する-Azure-Backup-の場合" class="headerlink" title=" 2. Azure ファイル共有に対する Azure Backup の場合"></a><a id="2"></a> 2. Azure ファイル共有に対する Azure Backup の場合</h2><table>
+<thead>
+<tr>
+<th>Azure ファイル共有 に対するバックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎日</td>
+<td>1 日</td>
+<td>200 日</td>
+</tr>
+<tr>
+<td>毎週</td>
+<td>1 週</td>
+<td>200 週</td>
+</tr>
+<tr>
+<td>毎月</td>
+<td>1 ヶ月</td>
+<td>120 ヶ月</td>
+</tr>
+<tr>
+<td>毎年</td>
+<td>1 年</td>
+<td>10 年</td>
+</tr>
+</tbody></table>
+<h2 id="3-SQL-Server-DB-に対する-Azure-Backup-の場合"><a href="#3-SQL-Server-DB-に対する-Azure-Backup-の場合" class="headerlink" title=" 3. SQL Server DB に対する Azure Backup の場合"></a><a id="3"></a> 3. SQL Server DB に対する Azure Backup の場合</h2><table>
+<thead>
+<tr>
+<th>完全バックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎日</td>
+<td>7 日</td>
+<td>9999 日</td>
+</tr>
+<tr>
+<td>毎週</td>
+<td>1 週</td>
+<td>5163 週</td>
+</tr>
+<tr>
+<td>毎月</td>
+<td>1 ヶ月</td>
+<td>1188 ヶ月</td>
+</tr>
+<tr>
+<td>毎年</td>
+<td>1 年</td>
+<td>99 年</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>差分バックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎週</td>
+<td>7 日</td>
+<td>180 日</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>ログバックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎分/毎時</td>
+<td>7 日</td>
+<td>35 日</td>
+</tr>
+</tbody></table>
+<h2 id="4-SAP-HANA-DB-に対する-Azure-Backup-の場合"><a href="#4-SAP-HANA-DB-に対する-Azure-Backup-の場合" class="headerlink" title=" 4. SAP HANA DB に対する Azure Backup の場合"></a><a id="4"></a> 4. SAP HANA DB に対する Azure Backup の場合</h2><table>
+<thead>
+<tr>
+<th>完全バックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎日</td>
+<td>7 日</td>
+<td>9999 日</td>
+</tr>
+<tr>
+<td>毎週</td>
+<td>1 週</td>
+<td>5163 週</td>
+</tr>
+<tr>
+<td>毎月</td>
+<td>1 ヶ月</td>
+<td>1188 ヶ月</td>
+</tr>
+<tr>
+<td>毎年</td>
+<td>1 年</td>
+<td>99 年</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>差分バックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎週</td>
+<td>7 日</td>
+<td>180 日</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>増分バックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎週</td>
+<td>7 日</td>
+<td>180 日</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>ログバックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎分/毎時</td>
+<td>7 日</td>
+<td>35 日</td>
+</tr>
+</tbody></table>
+<h2 id="5-Microsoft-Azure-Recovery-Services-MARS-の場合"><a href="#5-Microsoft-Azure-Recovery-Services-MARS-の場合" class="headerlink" title=" 5. Microsoft Azure Recovery Services (MARS) の場合"></a><a id="5"></a> 5. Microsoft Azure Recovery Services (MARS) の場合</h2><table>
+<thead>
+<tr>
+<th>MARS バックアップの頻度</th>
+<th>最小保持期間</th>
+<th>最大保持期間</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>毎日</td>
+<td>7 日</td>
+<td>9999 日</td>
+</tr>
+<tr>
+<td>毎週</td>
+<td>4 週</td>
+<td>5163 週</td>
+</tr>
+<tr>
+<td>毎月</td>
+<td>3 ヶ月</td>
+<td>1316 ヶ月</td>
+</tr>
+<tr>
+<td>毎年</td>
+<td>1 年</td>
+<td>100 年</td>
+</tr>
+</tbody></table>
+<p>Azure Backup における保有期間について、以上となります。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Recovery-Services-vaults/" rel="tag">Recovery Services vaults</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/how-to/" rel="tag">how to</a></li></ul>
+
+        
+        <a href="https://jpabrs-scem.github.io/blog/edit/main/articles/RecoveryServicesVaults/Backup_RetentionPeriod.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../information/example/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          私、バリキャリOLのたかと。
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../AzureSQLBackup/How_to_PE_SQL_backup_bypass_proxy/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">SQL Server DB に対する Azure Backupを、Proxy Serverをバイパスして PE 経由でバックアップする場合の設定</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../../information/example2/">私、ヨガインストラクターのたつみ。</a>
+          </li>
+        
+          <li>
+            <a href="../../information/example/">私、バリキャリOLのたかと。</a>
+          </li>
+        
+          <li>
+            <a href="">Azure Backup の 保持期間について</a>
+          </li>
+        
+          <li>
+            <a href="../../AzureSQLBackup/How_to_PE_SQL_backup_bypass_proxy/">SQL Server DB に対する Azure Backupを、Proxy Serverをバイパスして PE 経由でバックアップする場合の設定</a>
+          </li>
+        
+          <li>
+            <a href="../DR_ASR_or_VMBackup/">Azure VM Backup と Azure Site Recovery による DR 要件について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-SQL-%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">Azure SQL バックアップ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Example/" rel="tag">Example</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Recovery-Services-vaults/" rel="tag">Recovery Services vaults</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/how-to/" rel="tag">how to</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96/" rel="tag">情報採取</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Recovery-Services-vaults/">Recovery Services vaults</a><span class="tag-list-count">6</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Recovery-Services-vaults/how-to">how to</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Recovery-Services-vaults/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96">情報採取</a><span class="tag-list-count">2</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/">Information</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Information/Example">Example</a><span class="tag-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/12/">2020 / 12</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-SQL-%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97/" style="font-size: 10px;">Azure SQL バックアップ</a> <a href="../../tags/Example/" style="font-size: 12.5px;">Example</a> <a href="../../tags/Information/" style="font-size: 15px;">Information</a> <a href="../../tags/Recovery-Services-vaults/" style="font-size: 20px;">Recovery Services vaults</a> <a href="../../tags/how-to/" style="font-size: 17.5px;">how to</a> <a href="../../tags/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96/" style="font-size: 12.5px;">情報採取</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan CSS ABRS &amp; SCEM Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

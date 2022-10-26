@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Backup の障害調査に必要な情報 (疎通確認) | Japan CSS ABRS  Support Blog !!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="皆様こんにちは。Azure Backup サポートの山本です。今回は Azure Backup のバックアップ失敗、リストア失敗の時の調査をするにあたり、NW 観点で提供いただきたい情報をお伝えいたします。NW 観点以外の情報採集提供依頼については下記をご覧ください・Azure Backup の障害調査に必要な情報https:&#x2F;&#x2F;jpabrs-scem.github.io&#x2F;blog&#x2F;Recove">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Backup の障害調査に必要な情報 (疎通確認)">
+<meta property="og:url" content="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/RequestForInvestigatingNW/index.html">
+<meta property="og:site_name" content="Japan CSS ABRS  Support Blog !!">
+<meta property="og:description" content="皆様こんにちは。Azure Backup サポートの山本です。今回は Azure Backup のバックアップ失敗、リストア失敗の時の調査をするにあたり、NW 観点で提供いただきたい情報をお伝えいたします。NW 観点以外の情報採集提供依頼については下記をご覧ください・Azure Backup の障害調査に必要な情報https:&#x2F;&#x2F;jpabrs-scem.github.io&#x2F;blog&#x2F;Recove">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://user-images.githubusercontent.com/71251920/175529513-5196c393-be7b-439e-aba3-063969d1ce26.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/71251920/175529518-afd3ab91-e450-42b9-b7b6-310c6633cca1.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/71251920/175529520-b67e7eab-baef-4036-8c89-64ec9a86e40b.gif">
+<meta property="og:image" content="https://user-images.githubusercontent.com/71251920/175529523-b5004d01-f4cd-4879-9c48-b9de17a8c477.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/71251920/185762249-d5dbed3c-9bce-409e-8a88-a5b43a52fe95.png">
+<meta property="article:published_time" content="2022-06-24T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-26T04:52:08.547Z">
+<meta property="article:author" content="Japan CSS ABRS &amp; SCEM Support Team">
+<meta property="article:tag" content="Recovery Services vaults">
+<meta property="article:tag" content="情報採取">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/71251920/175529513-5196c393-be7b-439e-aba3-063969d1ce26.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan CSS ABRS  Support Blog !!" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpabrs-scem.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan CSS ABRS  Support Blog !!</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">Azure Backup , Azure Site Recovery , Azure Migrate に関するサポート情報を発信します。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-RecoveryServicesVaults/RequestForInvestigatingNW" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Backup の障害調査に必要な情報 (疎通確認)
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-06-24T03:00:00.000Z" itemprop="datePublished">2022-06-24</time>
+</a>
+        
+        
+        <a href="https://jpabrs-scem.github.io/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+971c4226-694e-5c75-8da6-ca80e0154cf3%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Backup+%E3%81%AE%E9%9A%9C%E5%AE%B3%E8%AA%BF%E6%9F%BB%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E6%83%85%E5%A0%B1+%28%E7%96%8E%E9%80%9A%E7%A2%BA%E8%AA%8D%29%5D%28https%3A%2F%2Fjpabrs-scem.github.io%2Fblog%2FRecoveryServicesVaults%2FRequestForInvestigatingNW%2F%29%0A*+Content+Source%3A+%5Barticles%2FRecoveryServicesVaults%2FRequestForInvestigatingNW.md%5D%28https%3A%2F%2Fjpabrs-scem.github.io%2Fblog%2Fblob%2Fmain%2Farticles%2FRecoveryServicesVaults%2FRequestForInvestigatingNW.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/RequestForInvestigatingNW/" data-id="cl9p5tvls00050mpo8igd5qus" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<p>皆様こんにちは。Azure Backup サポートの山本です。<br>今回は Azure Backup のバックアップ失敗、リストア失敗の時の調査をするにあたり、NW 観点で提供いただきたい情報をお伝えいたします。<br>NW 観点以外の情報採集提供依頼については下記をご覧ください<br>・Azure Backup の障害調査に必要な情報<br><a href="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/RequestForInvestigating/">https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/RequestForInvestigating/</a></p>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><hr>
+<p><a href="#1">1. Windows VM における Azure Backup 疎通確認</a><br><a href="#2">2. Linux VM における Azure Backup 疎通確認</a><br><a href="#3">3. プライベート エンドポイント環境における Azure Backup 疎通確認</a></p>
+<hr>
+<h2 id="1-Windows-VM-における-Azure-Backup-疎通確認"><a href="#1-Windows-VM-における-Azure-Backup-疎通確認" class="headerlink" title="1. Windows VM における Azure Backup 疎通確認"></a>1. Windows VM における Azure Backup 疎通確認<a id="1"></a></h2><p>まず、下記 リンク先から疎通確認スクリプトのダウンロードをお願いします。<br><a target="_blank" rel="noopener" href="https://github.com/jpabrs-scem/blog/files/9391344/Check_Backup_NW_ver1.6.zip">Check_Backup_NW_ver1.6.zip</a></p>
+<p>(スクリプト実行手順)</p>
+<ol>
+<li>疎通確認スクリプトをダウンロードし、展開してください。<br>※ ファイルの解凍パスワードは <strong>“AzureBackup”</strong> となります。</li>
+<li>PowerShell を右クリックし、管理者として実行をクリックしてください。</li>
+</ol>
+<p> <img src="https://user-images.githubusercontent.com/71251920/175529513-5196c393-be7b-439e-aba3-063969d1ce26.png"></p>
+<ol start="3">
+<li>PowerShell にて手順 1 で展開したスクリプトの場所に移動してください。<br>例 ) “Takato” というユーザーのデスクトップ上の PowerShell というフォルダ内にスクリプトをダウンロードしたときの移動コマンド<blockquote>
+<p>cd C:\Users\Takato\Desktop\powershell</p>
+</blockquote>
+</li>
+<li>以下コマンドを実行し、スクリプトを実行してください。<br>(現在画像とバージョンが異なりますが、同様の手順でございます。)<blockquote>
+<p>.\Check_Backup_NW_ver1.4.ps1<br><img src="https://user-images.githubusercontent.com/71251920/175529518-afd3ab91-e450-42b9-b7b6-310c6633cca1.png"></p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>上記スクリプト実施時に実行ポリシーの制限によりスクリプトが実行できない場合はPowerShell を管理者権限で起動し、下記コマンドを実行し実行ポリシーを変更後、再度実行していただければ幸いでございます。<blockquote>
+<p>Set-ExecutionPolicy Unrestricted</p>
+</blockquote>
+</li>
+</ul>
+<ol start="5">
+<li>以下のような “ScriptStart Completed” 出力がされるまで、お待ちください。</li>
+</ol>
+<p>*コマンドの実行には、環境によって 20 分ほど要する場合がございます。20 分経っても完了しない場合は、control + c を押下して強制終了してください。</p>
+<p><img src="https://user-images.githubusercontent.com/71251920/175529520-b67e7eab-baef-4036-8c89-64ec9a86e40b.gif"></p>
+<ol start="6">
+<li>コマンド実行が完了すると、スクリプトと同じフォルダ内に以下のようなログファイルが出力されますので、弊社までご提供お願いいたします。<br>ログファイル名: AzureBackup_Check_NW_yyyymmdd_hhmmss.log</li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/71251920/175529523-b5004d01-f4cd-4879-9c48-b9de17a8c477.jpg"></p>
+<ul>
+<li>control + c にて強制終了した場合においても該当のログファイルが出力されますので、弊社までご提供お願いいたします。</li>
+</ul>
+<h2 id="2-Linux-VM-における-Azure-Backup-疎通確認"><a href="#2-Linux-VM-における-Azure-Backup-疎通確認" class="headerlink" title="2. Linux VM における Azure Backup 疎通確認"></a>2. Linux VM における Azure Backup 疎通確認<a id="2"></a></h2><p>まず、下記 リンク先から疎通確認スクリプトのダウンロードをお願いします。<br><a target="_blank" rel="noopener" href="https://github.com/jpabrs-scem/blog/files/9387864/Check_Backup_NW_Linux_ver1.3.zip">Check_Backup_NW_Linux_ver1.3.zip</a></p>
+<p>(スクリプト実行手順)</p>
+<ol>
+<li><p>疎通確認スクリプトをダウンロードし、展開してください。<br>※ ファイルの解凍パスワードは <strong>“AzureBackup”</strong> となります。</p>
+</li>
+<li><p>対象の Linux マシンにスクリプトを移動し実行します。<br>必要に応じて chmod コマンドなどを用いてパーミッションを変更してください。</p>
+<blockquote>
+<p>chmod 777 Check_Backup_NW_Linux_ver1.3.sh </p>
+</blockquote>
+</li>
+</ol>
+<p>下記のように実行します。</p>
+<blockquote>
+<p>./Check_Backup_NW_Linux_ver1.3.sh</p>
+</blockquote>
+<ol start="3">
+<li>実行完了<br>実行が完了すれば下記のファイルが作成されます。<br>弊社までご提供お願いいたします。<blockquote>
+<p>ログファイルは CheckNWResult_(ホスト名)_(YYYYMMDDHHMM).log です。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="2-1-参考画像"><a href="#2-1-参考画像" class="headerlink" title="2.1 参考画像"></a>2.1 参考画像</h3><p><img src="https://user-images.githubusercontent.com/71251920/185762249-d5dbed3c-9bce-409e-8a88-a5b43a52fe95.png" alt="-参考画像-"></p>
+<h2 id="3-プライベート-エンドポイント環境における-Azure-Backup-疎通確認"><a href="#3-プライベート-エンドポイント環境における-Azure-Backup-疎通確認" class="headerlink" title="3. プライベート エンドポイント環境における Azure Backup 疎通確認"></a>3. プライベート エンドポイント環境における Azure Backup 疎通確認<a id="3"></a></h2><p> Azure VM 上の DB のバックアップ (Azure  SQL VM Backup や　Azure SAP HANA バックアップ) や MARS エージェントを利用したバックアップで<strong>プライベート エンドポイントをご利用の場合</strong>は下記もご対応お願いします。</p>
+<p>・必須の DNS エントリを取得する<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/backup/private-endpoints#step-1-get-required-dns-entries">https://learn.microsoft.com/ja-jp/azure/backup/private-endpoints#step-1-get-required-dns-entries</a></p>
+<p>上記 URL に従って下記  PowerShell スクリプトをご実施いただき、名前解決ができるかおよび疎通確認をお願いします。</p>
+<p><a target="_blank" rel="noopener" href="https://download.microsoft.com/download/1/2/6/126a410b-0e06-45ed-b2df-84f353034fa1/PrivateIP.ps1">PrivateIP.ps1</a></p>
+<p>*Azure PowerShell が実行できる (Az moduleがインストールされた) 環境でご実施ください。</p>
+<p>・[ご参考] Install the Azure Az PowerShell module<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-8.3.0">https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-8.3.0</a></p>
+<h3 id="結果に-“backup”-が含まれる場合から1つの宛先に対する疎通確認"><a href="#結果に-“backup”-が含まれる場合から1つの宛先に対する疎通確認" class="headerlink" title="結果に “backup” が含まれる場合から1つの宛先に対する疎通確認"></a>結果に “backup” が含まれる場合から1つの宛先に対する疎通確認</h3><p>“privatlink” 付の FQDN に対して疎通確認を行ってください。<br>実施いただいたスクリプトの実行結果と後述の疎通確認コマンドの結果をテキスト(可能であれば画面ショットも添えて) zip などにおまとめの上ご提供お願いします。</p>
+<blockquote>
+<p>スクリプト実行結果例)<br><code> </code> &lt;vaultId&gt;-ab-pod01-fc1      <strong>privatelink</strong>.eus.<strong>backup</strong>.windowsazure.com     10.12.0.15</p>
+</blockquote>
+<p>スクリプトの実行結果が上記の場合は下記のようにお願いします。<br>また hosts ファイルをご利用の場合は nslookup コマンドの代わりに ping コマンドをご利用ください。</p>
+<p><strong>windows(PowerShell)</strong></p>
+<blockquote>
+<p>nslookup(ping) &lt;vaultId&gt;-ab-pod01-fc1.<strong>privatelink</strong>.eus.backup.windowsazure.com<br>tnc -port 443 &lt;vaultId&gt;-ab-pod01-fc1.<strong>privatelink</strong>.eus.backup.windowsazure.com<br>tnc -port 443 10.12.0.15<br>Invoke-WebRequest https://&lt;vaultId&gt;-ab-pod01-fc1.<strong>privatelink</strong>.eus.backup.windowsazure.com<br>Invoke-WebRequest <a target="_blank" rel="noopener" href="https://10.12.0.15/">https://10.12.0.15</a></p>
+</blockquote>
+<p><strong>Linux</strong></p>
+<blockquote>
+<p>nslookup(ping) &lt;vaultId&gt;-ab-pod01-fc1.<strong>privatelink</strong>.eus.backup.windowsazure.com<br>nc -vz &lt;vaultId&gt;-ab-pod01-fc1.<strong>privatelink</strong>.eus.backup.windowsazure.com<br>nc -vz  10.12.0.15　443<br>curl -I https://&lt;vaultId&gt;-ab-pod01-fc1.<strong>privatelink</strong>.eus.backup.windowsazure.com<br>curl -I <a target="_blank" rel="noopener" href="https://10.12.0.15/">https://10.12.0.15</a> </p>
+</blockquote>
+<h3 id="結果に-“backup”-が含まれない-“blob”-や”queue”等が含まれる-場合"><a href="#結果に-“backup”-が含まれない-“blob”-や”queue”等が含まれる-場合" class="headerlink" title="結果に “backup” が含まれない (“blob” や”queue”等が含まれる) 場合"></a>結果に “backup” が含まれない (“blob” や”queue”等が含まれる) 場合</h3><p>こちらは初期調査では一旦不要です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Recovery-Services-vaults/" rel="tag">Recovery Services vaults</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96/" rel="tag">情報採取</a></li></ul>
+
+        
+        <a href="https://jpabrs-scem.github.io/blog/edit/main/articles/RecoveryServicesVaults/RequestForInvestigatingNW.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../Backup_RecoveryTIme/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          Azure Backup の バックアップ / リストア 所要時間について
+        
+      </div>
+    </a>
+  
+  
+    <a href="../RequestForInvestigating/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Backup の障害調査に必要な情報</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../../information/example2/">私、ヨガインストラクターのたつみ。</a>
+          </li>
+        
+          <li>
+            <a href="../../information/example/">私、バリキャリOLのたかと。</a>
+          </li>
+        
+          <li>
+            <a href="../Backup_RetentionPeriod/">Azure Backup の 保持期間について</a>
+          </li>
+        
+          <li>
+            <a href="../../AzureSQLBackup/How_to_PE_SQL_backup_bypass_proxy/">SQL Server DB に対する Azure Backupを、Proxy Serverをバイパスして PE 経由でバックアップする場合の設定</a>
+          </li>
+        
+          <li>
+            <a href="../DR_ASR_or_VMBackup/">Azure VM Backup と Azure Site Recovery による DR 要件について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-SQL-%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97/" rel="tag">Azure SQL バックアップ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Example/" rel="tag">Example</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/" rel="tag">Information</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Recovery-Services-vaults/" rel="tag">Recovery Services vaults</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/how-to/" rel="tag">how to</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96/" rel="tag">情報採取</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Recovery-Services-vaults/">Recovery Services vaults</a><span class="tag-list-count">6</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Recovery-Services-vaults/how-to">how to</a><span class="tag-list-count">4</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Recovery-Services-vaults/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96">情報採取</a><span class="tag-list-count">2</span></li></ul></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Information/">Information</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Information/Example">Example</a><span class="tag-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/02/">2022 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/01/">2022 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/12/">2020 / 12</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-SQL-%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97/" style="font-size: 10px;">Azure SQL バックアップ</a> <a href="../../tags/Example/" style="font-size: 12.5px;">Example</a> <a href="../../tags/Information/" style="font-size: 15px;">Information</a> <a href="../../tags/Recovery-Services-vaults/" style="font-size: 20px;">Recovery Services vaults</a> <a href="../../tags/how-to/" style="font-size: 17.5px;">how to</a> <a href="../../tags/%E6%83%85%E5%A0%B1%E6%8E%A1%E5%8F%96/" style="font-size: 12.5px;">情報採取</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan CSS ABRS &amp; SCEM Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
