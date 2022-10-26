@@ -15,10 +15,10 @@ disableDisclaimer: false
 ・保有の制限
 https://docs.microsoft.com/ja-jp/azure/backup/backup-support-matrix#retention-limits
 
-https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png
+![](https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png)
 
 （図例：Azure VM Backup の場合）
-https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png
+![](https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png)
 
 ## 目次
 -----------------------------------------------------------
@@ -39,7 +39,7 @@ https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-
 |  毎年  |  1 年  |  99 年  |
 
 （補足）オンデマンド バックアップの場合、最大 99 年まで保持期間を指定可能です。
-https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png
+![](https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png)
 
 ## <a id="2"></a> 2. Azure ファイル共有に対する Azure Backup の場合
 |  Azure ファイル共有 に対するバックアップの頻度  |  最小保持期間  |  最大保持期間  |
