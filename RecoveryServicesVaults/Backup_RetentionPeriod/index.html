@@ -13,12 +13,16 @@
 <meta property="og:site_name" content="Japan CSS ABRS  Support Blog !!">
 <meta property="og:description" content="皆様こんにちは。Azure Backup サポートです。今回は、よくお問い合わせをうける「保持期限」について、取りまとめてお伝えします。公開ドキュメント上では、下記のように「最大保有期間：バックアップ頻度次第」と記載が書かれており、実際に「毎日」「毎週」のバックアップを構成した場合の最大保有期間は、ポリシー作成画面で確認するのみとなっております。 ・保有の制限https:&#x2F;&#x2F;docs.micro">
 <meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png">
 <meta property="article:published_time" content="2022-10-25T03:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-26T04:52:08.547Z">
+<meta property="article:modified_time" content="2022-10-26T05:22:20.186Z">
 <meta property="article:author" content="Japan CSS ABRS &amp; SCEM Support Team">
 <meta property="article:tag" content="Recovery Services vaults">
 <meta property="article:tag" content="how to">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan CSS ABRS  Support Blog !!" type="application/atom+xml">
   
@@ -103,7 +107,7 @@
         
         <a href="https://jpabrs-scem.github.io/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+15194503-f198-56b3-83a3-05bc766d03c5%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Backup+%E3%81%AE+%E4%BF%9D%E6%8C%81%E6%9C%9F%E9%96%93%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpabrs-scem.github.io%2Fblog%2FRecoveryServicesVaults%2FBackup_RetentionPeriod%2F%29%0A*+Content+Source%3A+%5Barticles%2FRecoveryServicesVaults%2FBackup_RetentionPeriod.md%5D%28https%3A%2F%2Fjpabrs-scem.github.io%2Fblog%2Fblob%2Fmain%2Farticles%2FRecoveryServicesVaults%2FBackup_RetentionPeriod.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/Backup_RetentionPeriod/" data-id="cl9p5tvlm00010mpo1vfrg8y2" class="article-share-link">共有</a>
+        <a data-url="https://jpabrs-scem.github.io/blog/RecoveryServicesVaults/Backup_RetentionPeriod/" data-id="cl9p6wpwc00010mt657dyc1w3" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -111,8 +115,8 @@
         <span id="more"></span>
 <p>皆様こんにちは。Azure Backup サポートです。<br>今回は、よくお問い合わせをうける「保持期限」について、取りまとめてお伝えします。<br>公開ドキュメント上では、下記のように「最大保有期間：バックアップ頻度次第」と記載が書かれており、実際に「毎日」「毎週」のバックアップを構成した場合の最大保有期間は、ポリシー作成画面で確認するのみとなっております。</p>
 <p>・保有の制限<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/backup/backup-support-matrix#retention-limits">https://docs.microsoft.com/ja-jp/azure/backup/backup-support-matrix#retention-limits</a></p>
-<p><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png">https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png</a></p>
-<p>（図例：Azure VM Backup の場合）<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png">https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png</a></p>
+<p><img src="https://user-images.githubusercontent.com/96324317/197381027-dcf0c231-950e-4b50-a14f-4f2d991c9616.png"></p>
+<p>（図例：Azure VM Backup の場合）<br><img src="https://user-images.githubusercontent.com/96324317/197453814-73c643d9-ad3f-458c-b729-4fb7a409aab6.png"></p>
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><hr>
 <p><a href="#1">1. Azure VM Backup の場合</a><br><a href="#2">2. Azure ファイル共有に対する Azure Backup の場合</a><br><a href="#3">3. SQL Server DB に対する Azure Backup の場合</a><br><a href="#4">4. SAP HANA DB に対する Azure Backup の場合</a><br><a href="#5">5. Microsoft Azure Recovery Services (MARS) の場合</a></p>
 <hr>
@@ -150,7 +154,7 @@
 <td>99 年</td>
 </tr>
 </tbody></table>
-<p>（補足）オンデマンド バックアップの場合、最大 99 年まで保持期間を指定可能です。<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png">https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png</a></p>
+<p>（補足）オンデマンド バックアップの場合、最大 99 年まで保持期間を指定可能です。<br><img src="https://user-images.githubusercontent.com/96324317/197448093-5b532557-b4e6-44de-b837-01993756862a.png"></p>
 <h2 id="2-Azure-ファイル共有に対する-Azure-Backup-の場合"><a href="#2-Azure-ファイル共有に対する-Azure-Backup-の場合" class="headerlink" title=" 2. Azure ファイル共有に対する Azure Backup の場合"></a><a id="2"></a> 2. Azure ファイル共有に対する Azure Backup の場合</h2><table>
 <thead>
 <tr>
